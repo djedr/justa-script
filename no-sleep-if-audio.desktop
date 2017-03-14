@@ -1,0 +1,16 @@
+[Desktop Entry]
+Type=Application
+Encoding=UTF-8
+
+Name=NoSleepIfAudio
+
+GenericName=Script
+GenericName[pl]=Skrypt
+
+Comment=Turn off sleep mode if audio playing
+Comment[pl]=Wyłącz tryb uśpienia, jeżeli karta muzyczna jest aktywna
+
+Exec=/usr/share/justa-script/run.sh no-sleep-if-audio.sh
+Terminal=false
+Categories=System;Audio;
+Icon=utilities-terminal

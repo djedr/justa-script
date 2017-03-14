@@ -2,19 +2,21 @@
 # usage:
 # self [<check_interval>]
 # `check_interval` is an argument to `sleep`. Default `check_interval` is 10 minutes.
-check_interval=${1:-10m}
+const checkInterval = process.argv[2] || '10m';
+const maxIdleTime = 2h;
+let idleTime = 0;
 
-echo 'Entering no-sleep-if-audio...'
-echo 'From now on sleep mode will be turned off when audio is active.'
 while true; do
     if grep -q RUNNING /proc/asound/card*/*p/*/status 2>&1; then
-	echo 'Preventing sleep mode...'
         xdotool mousemove_relative -- 1 0
         sleep 0.1s
         xdotool mousemove_relative -- -1 0
-	echo 'Prevented sleep mode.'
+        idle_time=idle_time+
+    else
+        idle_time=0
+    fi
+    if (mouse_position_changed) then
+        idle_time=0
     fi
     sleep $check_interval
 done
-echo 'Exiting no-sleep-if-audio...'
-echo 'From now on sleep mode will work as usual.'
